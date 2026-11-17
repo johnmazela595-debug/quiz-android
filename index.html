@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz informatique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1F4;--sf:#fff;--ink:#12202E;--mut:#5A6878;--ac:#2447D6;--acx:#fff;--ok:#16794C;--okb:#DDF3E8;--ko:#B3261E;--kob:#FBE3E0;--ln:#CFD6DE;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1620;--sf:#18222F;--ink:#E6ECF2;--mut:#98A6B6;--ac:#7C9BFF;--acx:#0F1620;--ok:#4CC38A;--okb:#12362A;--ko:#FF7B72;--kob:#3D1D1B;--ln:#2B394A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1620;--sf:#18222F;--ink:#E6ECF2;--mut:#98A6B6;--ac:#7C9BFF;--acx:#0F1620;--ok:#4CC38A;--okb:#12362A;--ko:#FF7B72;--kob:#3D1D1B;--ln:#2B394A;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 1.05rem/1.5 "Bricolage Grotesque",system-ui,sans-serif}
+#app{max-width:40rem;margin:0 auto;padding:1.5rem 1.1rem 3rem}
+h1{font-size:clamp(2.2rem,8vw,3.4rem);line-height:1.05;font-weight:800;margin:1rem 0 .6rem;letter-spacing:-.02em}
+h2{font-size:1.45rem;line-height:1.3;font-weight:600;margin:1.2rem 0 1rem}
+.lead{color:var(--mut);max-width:34rem;margin:0 0 1.6rem}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.themes{display:grid;gap:.7rem}
+.theme{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;text-align:left;background:var(--sf);border:1.5px solid var(--ln);border-radius:12px;padding:1rem 1.1rem}
+.theme:hover{border-color:var(--ac)}
+.theme.mix{background:var(--ac);color:var(--acx);border-color:var(--ac)}
+.tn{font-weight:600}.tc{font-size:.9rem;opacity:.75}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--mut);font-size:.95rem}
+.link{background:none;border:0;padding:.3rem 0;text-decoration:underline;color:var(--mut)}
+.bar{height:6px;background:var(--ln);border-radius:3px;margin-top:.6rem;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ac)}
+.opts{display:grid;gap:.6rem}
+.opt{display:flex;align-items:center;gap:.9rem;text-align:left;background:var(--sf);border:2px solid var(--ln);border-radius:12px;padding:.8rem 1rem}
+.opt:not(:disabled):hover{border-color:var(--ac)}
+.opt:disabled{cursor:default}
+.mk{flex:none;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--bg);border:1.5px solid var(--ln)}
+.opt.ok{background:var(--okb);border-color:var(--ok)}
+.opt.ok .mk{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.ko{background:var(--kob);border-color:var(--ko)}
+.opt.ko .mk{background:var(--ko);border-color:var(--ko);color:#fff}
+.idk,.next{display:block;width:100%;margin-top:1rem;padding:.85rem 1rem;border-radius:12px;font-weight:600}
+.idk{background:none;border:2px dashed var(--mut);color:var(--mut)}
+.idk:hover{color:var(--ink);border-color:var(--ink)}
+.next{background:var(--ac);color:var(--acx);border:2px solid var(--ac)}
+.fb{margin-top:1rem;padding:.9rem 1rem;border-left:5px solid var(--ok);background:var(--sf);border-radius:0 12px 12px 0}
+.rev{display:grid;gap:.6rem;margin-bottom:.5rem}
+.ri{display:grid;gap:.15rem;background:var(--sf);border:1.5px solid var(--ln);border-radius:12px;padding:.8rem 1rem}
+.ri span{color:var(--ok);font-weight:600}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .3s}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const D=[
+{c:"Réseaux",q:[
+["Que signifie « IP » dans « adresse IP » ?",["Internet Protocol","Internal Port","Interface Program","Internet Provider"],0,"IP signifie Internet Protocol : c’est l’adresse qui identifie un appareil sur un réseau."],
+["Quel protocole sécurise les sites web (cadenas dans le navigateur) ?",["HTTP","HTTPS","FTP","SMTP"],1,"HTTPS chiffre les échanges entre ton navigateur et le site."],
+["Quel appareil relie des réseaux entre eux et dirige les données ?",["Switch","Routeur","Clavier","Onduleur"],1,"Le routeur choisit le chemin des données entre les réseaux, par exemple entre ta maison et Internet."],
+["À quoi sert un DNS ?",["Chiffrer les mots de passe","Traduire un nom de site en adresse IP","Sauvegarder les fichiers","Bloquer les virus"],1,"Le DNS fonctionne comme un annuaire : il transforme un nom comme exemple.com en adresse IP."],
+["Quel câble relie le plus souvent un ordinateur à un réseau local ?",["HDMI","Ethernet","VGA","Jack"],1,"Le câble Ethernet (prise RJ45) est le standard des réseaux locaux filaires."]]},
+{c:"Matériel",q:[
+["Quel composant est le « cerveau » de l’ordinateur ?",["RAM","Processeur (CPU)","Disque dur","Carte son"],1,"Le processeur exécute les instructions des programmes."],
+["À quoi sert la RAM ?",["Stocker les fichiers pour toujours","Garder temporairement les données en cours d’utilisation","Refroidir l’ordinateur","Alimenter la carte mère"],1,"La RAM est une mémoire rapide mais temporaire : elle se vide quand on éteint l’ordinateur."],
+["Qu’est-ce qui distingue un SSD d’un disque dur classique (HDD) ?",["Il est plus lent","Il n’a pas de pièces mobiles et il est plus rapide","Il sert seulement aux imprimantes","Il ne stocke rien"],1,"Un SSD stocke sur des puces, sans disque qui tourne : il est plus rapide et plus résistant aux chocs."],
+["Quelle unité mesure la capacité de stockage ?",["Hertz","Octet","Watt","Pixel"],1,"On mesure le stockage en octets : Ko, Mo, Go, To."],
+["Quel composant gère l’affichage graphique ?",["GPU (carte graphique)","BIOS","Alimentation","Souris"],0,"Le GPU calcule les images affichées à l’écran, notamment dans les jeux et la vidéo."]]},
+{c:"Programmation web",q:[
+["Quel langage structure le contenu d’une page web ?",["CSS","HTML","SQL","Python"],1,"HTML décrit la structure : titres, paragraphes, images, liens."],
+["À quoi sert le CSS ?",["À mettre en forme la page (couleurs, tailles, disposition)","À gérer une base de données","À configurer un réseau","À chiffrer des données"],0,"CSS s’occupe de l’apparence d’une page HTML."],
+["Quel langage rend une page interactive dans le navigateur ?",["JavaScript","SQL","C","Bash"],0,"JavaScript s’exécute dans le navigateur et réagit aux clics, aux saisies, etc."],
+["Quelle balise HTML crée un lien ?",["<a>","<p>","<img>","<div>"],0,"La balise <a> (comme « anchor ») avec l’attribut href crée un lien."],
+["En JavaScript, quel mot-clé déclare une variable dont la valeur peut changer ?",["let","const","static","fixed"],0,"let déclare une variable modifiable ; const déclare une valeur qu’on ne réassigne pas."]]},
+{c:"Bases de données",q:[
+["Que signifie SQL ?",["Structured Query Language","Simple Quick List","System Query Link","Secure Question Language"],0,"SQL est le langage standard pour interroger et gérer les bases de données."],
+["Quelle commande SQL lit des données ?",["SELECT","INSERT","DELETE","DROP"],0,"SELECT récupère les lignes d’une table."],
+["À quoi sert une clé primaire ?",["À identifier chaque ligne de façon unique","À chiffrer la table","À supprimer les doublons d’images","À sauvegarder la base"],0,"La clé primaire garantit que chaque ligne a un identifiant unique, comme un numéro d’élève."],
+["Quelle commande SQL ajoute une nouvelle ligne dans une table ?",["INSERT","SELECT","RENAME","SORT"],0,"INSERT INTO ajoute un enregistrement."],
+["Quel outil permet de gérer une base MySQL depuis le navigateur ?",["phpMyAdmin","Photoshop","VLC","Excel"],0,"phpMyAdmin est une interface web pour créer et modifier des bases MySQL."]]},
+{c:"Sécurité",q:[
+["Qu’est-ce que le phishing (hameçonnage) ?",["Un faux message qui cherche à voler tes informations","Une panne de réseau","Un type de câble","Une sauvegarde automatique"],0,"Le phishing imite une banque ou un service connu pour te pousser à donner tes identifiants."],
+["Quel mot de passe est le plus solide ?",["123456","Une phrase longue avec lettres, chiffres et symboles","Ton prénom","Ta date de naissance"],1,"La longueur et la variété des caractères rendent un mot de passe difficile à deviner."],
+["Quel est le rôle d’un antivirus ?",["Détecter et supprimer les logiciels malveillants","Accélérer Internet","Imprimer plus vite","Créer des sites web"],0,"Un antivirus surveille et élimine les programmes malveillants."],
+["Que fait l’authentification à deux facteurs ?",["Elle ajoute une seconde preuve d’identité en plus du mot de passe","Elle double la vitesse de connexion","Elle supprime le mot de passe","Elle sauvegarde le compte deux fois"],0,"Même si ton mot de passe est volé, il faut encore un code reçu sur ton téléphone ou une application."],
+["Que faire d’un lien suspect reçu par e-mail ?",["Cliquer vite pour vérifier","Ne pas cliquer et le signaler","Le transférer à tous ses contacts","Télécharger la pièce jointe"],1,"Un lien suspect peut mener à un faux site ou installer un virus : mieux vaut ne pas l’ouvrir."]]}
+];
+const app=document.getElementById("app");
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+let pool,i,score,miss;
+function home(){
+  app.replaceChildren();
+  app.append(el("h1",0,"Quiz informatique"),el("p","lead","Choisis un thème. Si tu te trompes, la bonne réponse s’affiche en vert avec une explication."));
+  const g=el("div","themes");
+  D.forEach(d=>{const b=el("button","theme");b.append(el("span","tn",d.c),el("span","tc",d.q.length+" questions"));b.onclick=()=>start(d.q);g.append(b)});
+  const all=el("button","theme mix");
+  all.append(el("span","tn","Tous les thèmes mélangés"),el("span","tc",D.reduce((n,d)=>n+d.q.length,0)+" questions"));
+  all.onclick=()=>start(D.flatMap(d=>d.q));
+  g.append(all);app.append(g);
+}
+function start(q){pool=sh(q);i=0;score=0;miss=[];show()}
+function show(){
+  const q=pool[i];app.replaceChildren();
+  const top=el("div","top"),quit=el("button","link","Quitter");quit.onclick=home;
+  top.append(quit,el("span",0,"Question "+(i+1)+" sur "+pool.length));
+  const bar=el("div","bar"),f=el("i");f.style.width=(i/pool.length*100)+"%";bar.append(f);
+  const opts=sh(q[1].map((t,k)=>({t,ok:k===q[2]})));
+  const L=el("div","opts"),B=[];
+  const fb=el("div","fb");fb.hidden=true;fb.setAttribute("aria-live","polite");
+  const nx=el("button","next",i+1<pool.length?"Question suivante":"Voir mon résultat");nx.hidden=true;
+  function done(pick){
+    B.forEach((b,k)=>{
+      b.disabled=true;
+      if(opts[k].ok){b.classList.add("ok");b.firstChild.textContent="✓"}
+      else if(k===pick){b.classList.add("ko");b.firstChild.textContent="✕"}
+    });
+    const good=pick>=0&&opts[pick].ok;
+    if(good)score++;else miss.push(q);
+    fb.hidden=false;
+    fb.append(el("strong",0,good?"Bonne réponse. ":"Raté, la bonne réponse est en vert. "),document.createTextNode(q[3]));
+    nx.hidden=false;nx.focus();
+  }
+  opts.forEach((o,k)=>{const b=el("button","opt");b.append(el("span","mk","ABCD"[k]),el("span",0,o.t));b.onclick=()=>done(k);B.push(b);L.append(b)});
+  nx.onclick=()=>{i++;i<pool.length?show():end()};
+  app.append(top,bar,el("h2",0,q[0]),L,fb,nx);
+}
+function end(){
+  app.replaceChildren();
+  app.append(el("h1",0,score+" / "+pool.length),el("p","lead",miss.length?miss.length+" question"+(miss.length>1?"s":"")+" à revoir.":"Sans faute !"));
+  if(miss.length){
+    const l=el("div","rev");
+    miss.forEach(q=>{const d=el("div","ri");d.append(el("b",0,q[0]),el("span",0,"Réponse : "+q[1][q[2]]));l.append(d)});
+    const r=el("button","next","Refaire les questions à revoir");r.onclick=()=>start(miss);
+    app.append(l,r);
+  }
+  const b=el("button","idk","Choisir un autre thème");b.onclick=home;app.append(b);
+}
+home();
+</script>
+</body>
+</html>
